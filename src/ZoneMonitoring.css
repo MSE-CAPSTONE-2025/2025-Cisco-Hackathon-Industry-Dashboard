@@ -1,0 +1,949 @@
+/* 구역 모니터링 스타일 */
+.zone-monitoring {
+  padding: 24px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+/* 상단 헤더 영역 */
+.zone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zone-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.tab-button {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #f0f0f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 100px;
+  font-weight: 500;
+}
+
+.tab-button:hover {
+  background-color: #e0e0e0;
+}
+
+.tab-button.active {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.tab-button.warning {
+  background-color: #fff7e6;
+  color: #faad14;
+  border: 1px solid #ffd591;
+}
+
+.tab-button.warning:hover {
+  background-color: #fff1d6;
+}
+
+.tab-button.danger {
+  background-color: #fff2f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+.tab-button.danger:hover {
+  background-color: #ffebe9;
+}
+
+/* 구역 컨텐츠 영역 */
+.zone-content {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 좌측: 구역 목록 */
+.zone-list-container {
+  width: 360px;
+  min-width: 360px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.zone-list-header {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.zone-list-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.zones-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.zone-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.zone-card:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+}
+
+.zone-card.selected {
+  background: #f0f7ff;
+  border-color: #1e3a8a;
+}
+
+.zone-status {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.zone-header {
+  margin-bottom: 12px;
+}
+
+.zone-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.zone-type {
+  font-size: 13px;
+  color: #666;
+}
+
+.zone-indicators {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.zone-sensor,
+.zone-hazard {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* 우측: 지도 및 상세 정보 */
+.zone-detail-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* 구역 지도 */
+.zone-map-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  height: 600px;
+  min-height: 600px;
+}
+
+.zone-map {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header {
+  margin-bottom: 16px;
+}
+
+.map-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.floor-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.floor-button {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.floor-button:hover {
+  background: #f5f5f5;
+}
+
+.floor-button.active {
+  background: #1e3a8a;
+  color: white;
+  border-color: #1e3a8a;
+}
+
+.map-content {
+  flex: 1;
+  position: relative;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.map-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.map-image svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 구역 마커 */
+.zone-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.zone-marker .marker-dot {
+  width: 24px;
+  height: 24px;
+  background-color: #1890ff;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.zone-marker .marker-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 2px solid #1890ff;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+  opacity: 0.6;
+}
+
+.zone-marker .marker-label {
+  position: absolute;
+  left: 30px;
+  top: -2px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.zone-marker:hover .marker-label {
+  opacity: 1;
+}
+
+.zone-marker.warning .marker-dot {
+  background-color: #faad14;
+}
+
+.zone-marker.warning .marker-pulse {
+  border-color: #faad14;
+}
+
+.zone-marker.danger .marker-dot {
+  background-color: #ff4d4f;
+}
+
+.zone-marker.danger .marker-pulse {
+  border-color: #ff4d4f;
+}
+
+.zone-marker.selected .marker-dot {
+  transform: scale(1.2);
+  border-width: 3px;
+}
+
+.marker-label {
+  position: absolute;
+  left: 24px;
+  top: -2px;
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: none;
+  z-index: 3;
+}
+
+.zone-marker:hover .marker-label {
+  display: block;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* 구역 상세 정보 */
+.zone-details {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.zone-details-header {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zone-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.zone-title h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.zone-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.zone-action-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.zone-action-btn:hover {
+  background: #f5f5f5;
+}
+
+.zone-details-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.zone-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding: 24px;
+}
+
+.info-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.info-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.info-row label {
+  color: #666;
+}
+
+.info-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+/* 센서 그리드 */
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.sensor-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sensor-info {
+  flex: 1;
+}
+
+.sensor-value {
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.sensor-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.sensor-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sensor-status.normal {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.sensor-status.warning {
+  background: #fff7e6;
+  color: #faad14;
+}
+
+.sensor-status.danger {
+  background: #fff2f0;
+  color: #ff4d4f;
+}
+
+/* 작업자 목록 */
+.workers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.worker-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.worker-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.worker-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.worker-info {
+  flex: 1;
+}
+
+.worker-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.worker-position {
+  font-size: 13px;
+  color: #666;
+}
+
+.contact-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #1e3a8a;
+  background: white;
+  color: #1e3a8a;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.contact-btn:hover {
+  background: #1e3a8a;
+  color: white;
+}
+
+/* 위험 요소 */
+.info-card.danger {
+  border: 1px solid #ffccc7;
+}
+
+.hazards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hazard-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.hazard-icon {
+  color: #ff4d4f;
+}
+
+.hazard-info {
+  flex: 1;
+}
+
+.hazard-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.hazard-message {
+  font-size: 13px;
+  color: #666;
+}
+
+.resolve-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ff4d4f;
+  background: white;
+  color: #ff4d4f;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.resolve-btn:hover {
+  background: #ff4d4f;
+  color: white;
+}
+
+/* 선택된 구역 없음 상태 */
+.no-zone-selected {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #666;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.no-zone-selected svg {
+  width: 48px;
+  height: 48px;
+  color: #d9d9d9;
+}
+
+.no-zone-selected p {
+  font-size: 16px;
+}
+
+.no-floor-plan {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  color: #666;
+  font-size: 16px;
+}
+
+/* 작업자 마커 스타일 */
+.worker-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  cursor: pointer;
+}
+
+.worker-marker .worker-marker-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.worker-marker .worker-marker-dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.worker-marker .worker-marker-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 1px solid #1890ff;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+  opacity: 0.6;
+}
+
+.worker-marker .worker-marker-label {
+  position: absolute;
+  left: 20px;
+  top: -2px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.worker-marker:hover .worker-marker-label {
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* 웹엑스 로딩 오버레이 */
+.webex-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #049fd9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.webex-loading-overlay p {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* 작업자 시점 화면 */
+.worker-view-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.worker-view-content {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.worker-view-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 1001;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* 웹엑스 스타일 컨트롤 바 */
+.worker-view-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.control-btn.active {
+  background: #049fd9;
+}
+
+.control-btn.danger {
+  background: #ff4d4f;
+}
+
+.control-btn.danger:hover {
+  background: #ff7875;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 경보 팝업 */
+.alert-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.alert-content {
+  background: white;
+  padding: 30px 30px 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  margin: auto;
+}
+
+.alert-content h3 {
+  color: #ff4d4f;
+  margin: 0 0 20px 0;
+  font-size: 24px;
+}
+
+.alert-content p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.alert-actions button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.alert-actions .webex-btn {
+  background: #049fd9;
+  color: white;
+}
+
+.alert-actions .webex-btn:hover {
+  background: #0388b7;
+}
+
+.alert-actions .close-btn {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.alert-actions .close-btn:hover {
+  background: #e0e0e0;
+}

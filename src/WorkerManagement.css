@@ -1,0 +1,536 @@
+/* 작업자 관리 스타일 */
+/* .worker-management {
+  padding: 20px;
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+} */
+
+/* 반응형 레이아웃 제거 및 고정 레이아웃 설정 */
+.worker-management {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.worker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.worker-content {
+  display: flex;
+  gap: 24px;
+  height: calc(100% - 56px);
+}
+
+.worker-list {
+  width: 360px;
+  min-width: 360px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.worker-details {
+  flex: 1;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 상단 도구 모음 */
+.worker-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0 12px 0;
+  padding: 0 24px;
+}
+
+.worker-search {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px 16px;
+  width: 280px;
+  transition: all 0.2s;
+  border: 1px solid #e0e0e0;
+}
+
+.search-bar:hover {
+  border-color: #d0d0d0;
+}
+
+.search-bar input {
+  border: none;
+  margin-left: 10px;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.search-bar input::placeholder {
+  color: #999;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px 16px;
+  transition: all 0.2s;
+  border: 1px solid #e0e0e0;
+}
+
+.filter-group:hover {
+  border-color: #d0d0d0;
+}
+
+.filter-group select {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  background: transparent;
+  cursor: pointer;
+  padding-right: 8px;
+}
+
+.worker-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.add-worker-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.add-worker-btn:hover {
+  background-color: #2c4999;
+  transform: translateY(-1px);
+}
+
+/* 작업자 컨텐츠 영역이 충분한 공간을 차지하도록 설정 */
+.worker-content {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+  min-height: 500px;
+}
+
+/* 작업자 목록 영역 고정 너비 지정 */
+.worker-list {
+  width: 360px;
+  flex-shrink: 0;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.worker-list h2 {
+  font-size: 18px;
+  padding: 15px 20px;
+  margin: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.list-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.worker-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #f0f0f0;
+}
+
+.worker-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.worker-card.selected {
+  border-color: #1e3a8a;
+  background-color: #f0f7ff;
+}
+
+.worker-status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.worker-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+  border: 1px solid #f0f0f0;
+}
+
+.worker-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.worker-info {
+  flex: 1;
+}
+
+.worker-name {
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.worker-position,
+.worker-department {
+  font-size: 13px;
+  color: #666;
+}
+
+.worker-vitals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.heart-rate,
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+}
+
+/* 작업자 상세 정보 */
+.worker-details {
+  flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.details-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+}
+
+.delete-button {
+  background-color: #fff2f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+.edit-button:hover {
+  background-color: #e0e0e0;
+}
+
+.delete-button:hover {
+  background-color: #fff1f0;
+}
+
+.detail-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.profile-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.profile-image {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-info h3 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  line-height: 1.6;
+}
+
+.info-row label {
+  color: #666;
+  width: 90px;
+  font-size: 14px;
+}
+
+.info-row span {
+  font-size: 14px;
+}
+
+.detail-sections {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.detail-section {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.detail-section h4 {
+  margin: 0 0 15px 0;
+  color: #1e3a8a;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.status-item {
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.status-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.status-value {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.certifications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.certification-badge {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid #91d5ff;
+}
+
+.activity-log {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+}
+
+.activity-time {
+  color: #666;
+  width: 100px;
+}
+
+/* 선택된 작업자가 없을 때 표시될 메시지 */
+.no-selection {
+  flex: 1;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-selection-message {
+  text-align: center;
+  color: #999;
+}
+
+.no-selection-message p {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .worker-content {
+    flex-direction: column;
+  }
+
+  .worker-list,
+  .worker-details,
+  .no-selection {
+    width: 100%;
+  }
+
+  .worker-list {
+    height: 300px;
+  }
+
+  .detail-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .worker-tools {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .search-filter {
+    width: 100%;
+  }
+
+  .search-box {
+    flex: 1;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-info {
+    align-items: center;
+  }
+
+  .info-row {
+    justify-content: center;
+  }
+}

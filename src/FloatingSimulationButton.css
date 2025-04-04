@@ -1,0 +1,373 @@
+/* 플로팅 버튼 스타일 */
+.floating-button-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.floating-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1002;
+}
+
+.floating-button:hover {
+  transform: scale(1.05);
+  background-color: #2c4999;
+}
+
+.floating-button.active {
+  transform: rotate(45deg);
+}
+
+/* 시뮬레이션 메뉴 스타일 */
+.simulation-menu {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  padding: 5px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 5px;
+}
+
+.sim-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #333;
+  font-size: 14px;
+}
+
+.sim-button:hover {
+  background-color: #f0f0f0;
+}
+
+.sim-button.fall {
+  color: #ff4d4f;
+}
+
+.sim-button.gas {
+  color: #fa8c16;
+}
+
+.sim-button.heart {
+  color: #ff4d4f;
+}
+
+.sim-button.zone {
+  color: #faad14;
+}
+
+/* 알림 모달 스타일 */
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1010;
+}
+
+.alert-modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 450px;
+  max-width: 90vw;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slide-in 0.3s ease;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.alert-title {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-icon {
+  display: flex;
+  align-items: center;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.alert-content {
+  padding: 20px;
+}
+
+.alert-info {
+  margin-bottom: 20px;
+}
+
+.alert-worker,
+.alert-location,
+.alert-time {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.alert-message {
+  font-size: 16px;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  border-left: 4px solid currentColor;
+}
+
+.alert-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.webex-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.webex-button:hover {
+  background-color: #40a9ff;
+}
+
+.resolve-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resolve-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* WebEx 모달 스타일 */
+.webex-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1020;
+}
+
+.webex-modal {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  width: 800px;
+  max-width: 95vw;
+  max-height: 90vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.webex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #333;
+  color: white;
+}
+
+.webex-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.webex-content {
+  padding: 20px;
+  color: white;
+}
+
+.connecting-animation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.connecting-text {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.stream-placeholder {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.stream-message {
+  color: #999;
+  font-size: 16px;
+}
+
+.webex-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 15px;
+}
+
+.control-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-button.mic {
+  background-color: #4caf50;
+  color: white;
+}
+
+.control-button.video {
+  background-color: #2196f3;
+  color: white;
+}
+
+.control-button.end {
+  background-color: #f44336;
+  color: white;
+}
+
+.control-button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .floating-button-container {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .alert-modal {
+    width: 95vw;
+  }
+
+  .alert-actions {
+    flex-direction: column;
+  }
+
+  .webex-controls {
+    gap: 10px;
+  }
+
+  .control-button {
+    width: 40px;
+    height: 40px;
+  }
+}
