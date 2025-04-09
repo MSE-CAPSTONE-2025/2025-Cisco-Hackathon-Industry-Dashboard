@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import ciscoLogo from "../assets/images/logos/cisco_logo.png";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -16,11 +17,7 @@ function Login({ onLogin }) {
       <div className="login-box">
         <div className="login-header">
           <div className="cisco-logo">
-            <img
-              src="/images/logos/cisco_logo.png"
-              alt="Cisco Logo"
-              className="logo-img"
-            />
+            <img src={ciscoLogo} alt="Cisco Logo" className="logo-img" />
           </div>
           <h1>시스코 안전 관리 시스템</h1>
         </div>
