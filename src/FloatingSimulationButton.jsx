@@ -169,7 +169,7 @@ const FloatingSimulationButton = () => {
     });
 
     // WebEx 메시지 전송 함수 호출
-    sendWebexMessage(type, worker.name, worker.location);
+    //sendWebexMessage(type, worker.name, worker.location);
 
     // 메뉴 닫기
     setIsOpen(false);
@@ -406,13 +406,11 @@ const FloatingSimulationButton = () => {
         <div className="worker-view-overlay">
           <div className="worker-view-content">
             <img
-              src={`/images/sites/${alert.location.replace(/\s/g, "")}.jpg`}
+              src="/images/sites/simulation.jpg"
               alt={`${alert.location} 작업 현장`}
               className="worker-view-image"
               onError={(e) => {
                 console.error("Image load error:", e.target.src);
-                console.error("Alert location:", alert.location);
-                console.error("Alert type:", alert.type);
                 // 대체 이미지로 변경
                 e.target.src =
                   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%23999'%3E이미지를 불러올 수 없습니다%3C/text%3E%3C/svg%3E";

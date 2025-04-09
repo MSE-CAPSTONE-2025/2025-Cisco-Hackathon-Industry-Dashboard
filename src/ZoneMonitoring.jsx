@@ -505,8 +505,8 @@ const ZoneMonitoring = () => {
           >
             위험 구역
           </button>
+          </div>
         </div>
-      </div>
 
       <div className="zone-content">
         {/* 좌측: 구역 목록 */}
@@ -514,41 +514,41 @@ const ZoneMonitoring = () => {
           <div className="zone-list-header">
             <h2>구역 목록 ({filteredZones.length})</h2>
           </div>
-          <div className="zones-grid">
-            {filteredZones.map((zone) => (
-              <div
-                key={zone.id}
-                className={`zone-card ${
-                  selectedZone && selectedZone.id === zone.id ? "selected" : ""
-                }`}
-                onClick={() => setSelectedZone(zone)}
-              >
+            <div className="zones-grid">
+              {filteredZones.map((zone) => (
                 <div
-                  className="zone-status"
-                  style={{ backgroundColor: getStatusColor(zone.status) }}
-                ></div>
-                <div className="zone-header">
-                  <h3>{zone.name}</h3>
-                  <span className="zone-type">{zone.type}</span>
-                </div>
-                <div className="zone-indicators">
-                  <div className="zone-sensor">
-                    <ThermometerIcon /> {zone.sensors.temperature}°C
+                  key={zone.id}
+                  className={`zone-card ${
+                  selectedZone && selectedZone.id === zone.id ? "selected" : ""
+                  }`}
+                onClick={() => setSelectedZone(zone)}
+                >
+                  <div
+                    className="zone-status"
+                    style={{ backgroundColor: getStatusColor(zone.status) }}
+                  ></div>
+                  <div className="zone-header">
+                    <h3>{zone.name}</h3>
+                    <span className="zone-type">{zone.type}</span>
                   </div>
-                  <div className="zone-sensor">
-                    <HumidityIcon /> {zone.sensors.humidity}%
-                  </div>
-                  <div className="zone-sensor">
-                    <WorkerIcon /> {zone.workers.length}명
-                  </div>
-                  {zone.hazards.length > 0 && (
-                    <div className="zone-hazard">
-                      <AlertIcon /> {zone.hazards.length}개 위험요소
+                  <div className="zone-indicators">
+                    <div className="zone-sensor">
+                      <ThermometerIcon /> {zone.sensors.temperature}°C
                     </div>
-                  )}
+                    <div className="zone-sensor">
+                      <HumidityIcon /> {zone.sensors.humidity}%
+                    </div>
+                    <div className="zone-sensor">
+                      <WorkerIcon /> {zone.workers.length}명
+                    </div>
+                    {zone.hazards.length > 0 && (
+                      <div className="zone-hazard">
+                        <AlertIcon /> {zone.hazards.length}개 위험요소
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
@@ -697,35 +697,35 @@ const ZoneMonitoring = () => {
                   <div className="info-card">
                     <h3>기본 정보</h3>
                     <div className="info-content">
-                      <div className="info-row">
-                        <label>구역 유형:</label>
-                        <span>{selectedZone.type}</span>
-                      </div>
-                      <div className="info-row">
-                        <label>보안 등급:</label>
-                        <span>{selectedZone.securityLevel}</span>
-                      </div>
-                      <div className="info-row">
-                        <label>최근 점검일:</label>
-                        <span>{selectedZone.lastInspection}</span>
-                      </div>
+                    <div className="info-row">
+                      <label>구역 유형:</label>
+                      <span>{selectedZone.type}</span>
+                    </div>
+                    <div className="info-row">
+                      <label>보안 등급:</label>
+                      <span>{selectedZone.securityLevel}</span>
+                    </div>
+                    <div className="info-row">
+                      <label>최근 점검일:</label>
+                      <span>{selectedZone.lastInspection}</span>
+                    </div>
                       <div className="info-description">
-                        {selectedZone.description}
-                      </div>
+                      {selectedZone.description}
                     </div>
                   </div>
+                </div>
 
                   <div className="info-card">
                     <h3>환경 센서</h3>
                     <div className="sensor-grid">
                       <div className="sensor-card">
-                        <ThermometerIcon />
+                          <ThermometerIcon />
                         <div className="sensor-info">
                           <span className="sensor-value">
                             {selectedZone.sensors.temperature}°C
                           </span>
                           <span className="sensor-label">온도</span>
-                        </div>
+                          </div>
                         <span
                           className={`sensor-status ${getSensorStatus(
                             "temperature",
@@ -737,15 +737,15 @@ const ZoneMonitoring = () => {
                             selectedZone.sensors.temperature
                           )}
                         </span>
-                      </div>
+                        </div>
                       <div className="sensor-card">
-                        <HumidityIcon />
+                          <HumidityIcon />
                         <div className="sensor-info">
                           <span className="sensor-value">
                             {selectedZone.sensors.humidity}%
                           </span>
                           <span className="sensor-label">습도</span>
-                        </div>
+                          </div>
                         <span
                           className={`sensor-status ${getSensorStatus(
                             "humidity",
@@ -757,15 +757,15 @@ const ZoneMonitoring = () => {
                             selectedZone.sensors.humidity
                           )}
                         </span>
-                      </div>
+                        </div>
                       <div className="sensor-card">
-                        <GasIcon />
+                          <GasIcon />
                         <div className="sensor-info">
                           <span className="sensor-value">
                             {selectedZone.sensors.gas.co} ppm
                           </span>
                           <span className="sensor-label">일산화탄소</span>
-                        </div>
+                          </div>
                         <span
                           className={`sensor-status ${getSensorStatus(
                             "gas.co",
@@ -777,15 +777,15 @@ const ZoneMonitoring = () => {
                             selectedZone.sensors.gas.co
                           )}
                         </span>
-                      </div>
+                        </div>
                       <div className="sensor-card">
-                        <GasIcon />
+                          <GasIcon />
                         <div className="sensor-info">
                           <span className="sensor-value">
                             {selectedZone.sensors.gas.co2} ppm
                           </span>
                           <span className="sensor-label">이산화탄소</span>
-                        </div>
+                          </div>
                         <span
                           className={`sensor-status ${getSensorStatus(
                             "gas.co2",
@@ -797,15 +797,15 @@ const ZoneMonitoring = () => {
                             selectedZone.sensors.gas.co2
                           )}
                         </span>
-                      </div>
+                        </div>
                       <div className="sensor-card">
-                        <NoiseIcon />
+                          <NoiseIcon />
                         <div className="sensor-info">
                           <span className="sensor-value">
                             {selectedZone.sensors.noise} dB
                           </span>
                           <span className="sensor-label">소음</span>
-                        </div>
+                          </div>
                         <span
                           className={`sensor-status ${getSensorStatus(
                             "noise",
@@ -814,18 +814,18 @@ const ZoneMonitoring = () => {
                         >
                           {getSensorStatus("noise", selectedZone.sensors.noise)}
                         </span>
-                      </div>
+                        </div>
                       <div className="sensor-card">
-                        <LightIcon />
+                          <LightIcon />
                         <div className="sensor-info">
                           <span className="sensor-value">
                             {selectedZone.sensors.light} lux
                           </span>
                           <span className="sensor-label">조도</span>
-                        </div>
+                          </div>
                         <span className="sensor-status normal">정상</span>
+                        </div>
                       </div>
-                    </div>
                   </div>
 
                   <div className="info-card">
@@ -855,7 +855,7 @@ const ZoneMonitoring = () => {
 
                   {selectedZone.hazards.length > 0 && (
                     <div className="info-card danger">
-                      <h3>위험 요소</h3>
+                    <h3>위험 요소</h3>
                       <div className="hazards-list">
                         {selectedZone.hazards.map((hazard, index) => (
                           <div
@@ -883,31 +883,31 @@ const ZoneMonitoring = () => {
                                 {hazard.message}
                               </div>
                             </div>
-                            <button className="resolve-btn">조치</button>
+                              <button className="resolve-btn">조치</button>
                           </div>
                         ))}
                       </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ) : (
+                      </div>
+                    )}
+                  </div>
+                            </div>
+                      </div>
+                    ) : (
             <div className="no-zone-selected">
               <AlertIcon />
               <p>구역을 선택하여 상세 정보를 확인하세요</p>
-            </div>
-          )}
-        </div>
-      </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
 
       {/* 웹엑스 로딩 오버레이 */}
       {isWebexLoading && (
         <div className="webex-loading-overlay">
           <div className="loading-spinner"></div>
           <p>웹엑스 연결 중...</p>
-        </div>
-      )}
+            </div>
+          )}
 
       {/* 작업자 시점 화면 */}
       {showWorkerView && selectedWorker && (
@@ -997,9 +997,9 @@ const ZoneMonitoring = () => {
                 </svg>
               </button>
             </div>
-          </div>
-        </div>
-      )}
+              </div>
+            </div>
+          )}
 
       {/* 경보 팝업 */}
       {alertPopup && (
@@ -1018,8 +1018,8 @@ const ZoneMonitoring = () => {
               <button className="close-btn" onClick={() => setAlertPopup(null)}>
                 닫기
               </button>
-            </div>
-          </div>
+        </div>
+      </div>
         </div>
       )}
     </div>
