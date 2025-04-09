@@ -1,8 +1,36 @@
 import React, { useState } from "react";
 import "./App.css";
+import Login from "./components/Login";
 import FloatingSimulationButton from "./FloatingSimulationButton";
 import WorkerManagement from "./WorkerManagement";
 import ZoneMonitoring from "./ZoneMonitoring";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 // 아이콘 컴포넌트들
 const SearchIcon = () => (
@@ -249,7 +277,16 @@ const InfoIcon = () => (
 );
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeMenu, setActiveMenu] = useState("종합 현황");
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  if (!isLoggedIn) {
+    return <Login onLogin={handleLogin} />;
+  }
 
   const menuItems = [
     { id: "종합 현황", icon: <HomeIcon />, title: "종합 현황", count: 0 },
@@ -402,6 +439,78 @@ function App() {
     },
   ];
 
+  // 차트 데이터
+  const heartRateData = {
+    labels: ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
+    datasets: [
+      {
+        label: "평균 심박수",
+        data: [75, 78, 82, 85, 82, 80, 78],
+        borderColor: "#1890ff",
+        backgroundColor: "rgba(24, 144, 255, 0.1)",
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const temperatureData = {
+    labels: ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"],
+    datasets: [
+      {
+        label: "평균 체온",
+        data: [36.5, 36.6, 36.8, 37.0, 36.9, 36.7, 36.6],
+        borderColor: "#ff4d4f",
+        backgroundColor: "rgba(255, 77, 79, 0.1)",
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const alertsByTypeData = {
+    labels: ["고온 경고", "유해가스", "낙상 위험", "배터리 부족", "장비 이상"],
+    datasets: [
+      {
+        data: [4, 3, 2, 5, 1],
+        backgroundColor: [
+          "#ff4d4f",
+          "#faad14",
+          "#52c41a",
+          "#1890ff",
+          "#722ed1",
+        ],
+      },
+    ],
+  };
+
+  const workersByAreaData = {
+    labels: [
+      "3층 변전실",
+      "1층 보일러실",
+      "2층 제어실",
+      "지하1층 배관실",
+      "외부 공사장 A구역",
+    ],
+    datasets: [
+      {
+        label: "작업자 수",
+        data: [1, 1, 1, 1, 1],
+        backgroundColor: "rgba(24, 144, 255, 0.8)",
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+  };
+
   // 상태에 따른 색상 반환
   const getStatusColor = (status) => {
     switch (status) {
@@ -505,6 +614,165 @@ function App() {
                 <div className="card-title">장비 배터리</div>
                 <div className="card-value">63%</div>
                 <div className="card-desc">2명 충전 필요</div>
+              </div>
+            </div>
+
+            {/* 차트 섹션 */}
+            <div className="charts-container">
+              <div className="heart-rate-chart">
+                <div className="chart-card">
+                  <h3>실시간 심박수 추이</h3>
+                  <div className="chart-container">
+                    <Line
+                      data={heartRateData}
+                      options={{
+                        ...chartOptions,
+                        scales: {
+                          y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 120,
+                            grid: {
+                              color: "rgba(0, 0, 0, 0.05)",
+                            },
+                          },
+                          x: {
+                            grid: {
+                              display: false,
+                            },
+                          },
+                        },
+                        plugins: {
+                          legend: {
+                            display: false,
+                          },
+                          tooltip: {
+                            backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            titleColor: "#fff",
+                            bodyColor: "#fff",
+                            padding: 12,
+                            displayColors: false,
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="temperature-chart">
+                <div className="chart-card">
+                  <h3>실시간 체온 추이</h3>
+                  <div className="chart-container">
+                    <Line
+                      data={temperatureData}
+                      options={{
+                        ...chartOptions,
+                        scales: {
+                          y: {
+                            beginAtZero: false,
+                            min: 35,
+                            max: 39,
+                            grid: {
+                              color: "rgba(0, 0, 0, 0.05)",
+                            },
+                          },
+                          x: {
+                            grid: {
+                              display: false,
+                            },
+                          },
+                        },
+                        plugins: {
+                          legend: {
+                            display: false,
+                          },
+                          tooltip: {
+                            backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            titleColor: "#fff",
+                            bodyColor: "#fff",
+                            padding: 12,
+                            displayColors: false,
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="alerts-chart">
+                <div className="chart-card">
+                  <h3>유형별 알림 현황</h3>
+                  <div className="chart-container">
+                    <Doughnut
+                      data={alertsByTypeData}
+                      options={{
+                        ...chartOptions,
+                        cutout: "60%",
+                        plugins: {
+                          legend: {
+                            position: "right",
+                            labels: {
+                              boxWidth: 12,
+                              padding: 15,
+                              font: {
+                                size: 12,
+                              },
+                            },
+                          },
+                          tooltip: {
+                            backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            titleColor: "#fff",
+                            bodyColor: "#fff",
+                            padding: 12,
+                            displayColors: true,
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="workers-chart">
+                <div className="chart-card">
+                  <h3>구역별 작업자 현황</h3>
+                  <div className="chart-container">
+                    <Bar
+                      data={workersByAreaData}
+                      options={{
+                        ...chartOptions,
+                        scales: {
+                          y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: {
+                              stepSize: 1,
+                            },
+                            grid: {
+                              color: "rgba(0, 0, 0, 0.05)",
+                            },
+                          },
+                          x: {
+                            grid: {
+                              display: false,
+                            },
+                          },
+                        },
+                        plugins: {
+                          legend: {
+                            display: false,
+                          },
+                          tooltip: {
+                            backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            titleColor: "#fff",
+                            bodyColor: "#fff",
+                            padding: 12,
+                            displayColors: false,
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
