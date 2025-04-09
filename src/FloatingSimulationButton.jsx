@@ -169,7 +169,7 @@ const FloatingSimulationButton = () => {
     });
 
     // WebEx 메시지 전송 함수 호출
-    //sendWebexMessage(type, worker.name, worker.location);
+    sendWebexMessage(type, worker.name, worker.location);
 
     // 메뉴 닫기
     setIsOpen(false);
